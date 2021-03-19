@@ -17,9 +17,9 @@ export class Combat<A extends Fighter, B extends Fighter> {
   start(): string[] {
     const battleLog: string[] = [];
 
-    const initialStatusLog: string = `Starting battle...\n` + 
-      `${this.fighterA.getName()} HP: ${this.fighterA.getHitPoints()} ${this.fighterA.talk()}\n` +
-      `${this.fighterB.getName()} HP: ${this.fighterB.getHitPoints()} ${this.fighterB.talk()}\n`;
+    const initialStatusLog: string = `Starting battle...\n`.yellow + 
+      `${this.fighterA.getName()} HP: ${this.fighterA.getHitPoints()} ${this.fighterA.talk()}\n`.blue +
+      `${this.fighterB.getName()} HP: ${this.fighterB.getHitPoints()} ${this.fighterB.talk()}\n`.blue;
 
     console.log(initialStatusLog);
     battleLog.push(initialStatusLog);
@@ -47,7 +47,7 @@ export class Combat<A extends Fighter, B extends Fighter> {
 
     const winner = this.fighterA.getHitPoints() > 0 ? this.fighterA : this.fighterB;
       
-    const winnerMsg: string = `\n${winner.getName()} WINS!  ${winner.talk()}\n`;
+    const winnerMsg: string = `\n${winner.getName()} WINS!  ${winner.talk()}\n`.blue;
 
     battleLog.push(winnerMsg);
     console.log(winnerMsg);
@@ -56,8 +56,8 @@ export class Combat<A extends Fighter, B extends Fighter> {
   }
 
   private printStatus(attacker: A | B = this.fighterA, defender: A | B = this.fighterB): string {
-    return `${attacker.getName()} Attacked! ${attacker.talk()} HP: ${attacker.getHitPoints()}\n` +
-            `${defender.getName()} Is under attack! ${defender.talk()} HP: ${defender.getHitPoints()}\n\n`;
+    return `${attacker.getName()} Attacked! ${attacker.talk()} HP: ${attacker.getHitPoints()}\n`.green +
+            `${defender.getName()} Is under attack! ${defender.talk()} HP: ${defender.getHitPoints()}\n\n`.red;
   }
 }
 
