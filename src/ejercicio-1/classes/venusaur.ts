@@ -1,3 +1,5 @@
+import { Fighter, effectVal } from './fighter';
+import { Marvel } from './marvel';
 import { Pokemon } from './pokemon';
 
 export class Venusaur extends Pokemon {
@@ -7,5 +9,22 @@ export class Venusaur extends Pokemon {
 
   talk(): string {
     return `Saurrr!`;
+  }
+
+  getEffectiveness(defender: Fighter): effectVal {
+    if (defender instanceof Marvel) {
+      if (defender.getPlanet() === 'ASGARD') return effectVal.notQuiteEffective;
+      return effectVal.superEffective;
+    }
+
+    if (defender instanceof Pokemon) {
+      switch (defender.getType()) {
+        case 'ELECTRIC': return effectVal.neutral;
+        case 'FIRE': return effectVal.notQuiteEffective;
+        case 'GRASS': return effectVal.notQuiteEffective;
+        case 'WATER': return effectVal.superEffective;
+      }
+    }
+    return effectVal.neutral;
   }
 };

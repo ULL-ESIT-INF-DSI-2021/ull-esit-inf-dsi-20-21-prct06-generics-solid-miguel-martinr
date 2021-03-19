@@ -1,6 +1,6 @@
 import { Fighter } from './fighter';
 
-export type PokemonType = 'ELECTRIC' | 'WATER' | 'GRASS' | 'FIRE';
+export type PokemonType = 'ELECTRIC' | 'WATER' | 'GRASS' | 'FIRE' | 'POISON';
 
 export abstract class Pokemon extends Fighter {
   constructor(name: string, height: number, 

@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Fighter } from '../../../src/ejercicio-1/classes/fighter'
+import { effectVal, Fighter } from '../../../src/ejercicio-1/classes/fighter'
 
 class MockFighter extends Fighter {
   constructor() {
@@ -9,6 +9,10 @@ class MockFighter extends Fighter {
 
   talk(): string {
     return `I am Jackie Chan`;
+  }
+
+  getEffectiveness(defender: Fighter): effectVal {
+    return effectVal.notQuiteEffective;
   }
 }
 
@@ -48,5 +52,9 @@ describe('Fighter tests', () => {
     expect(fighter.getSpeed()).to.be.eq(100);
     fighter.setHitPoints(0);
     expect(fighter.getHitPoints()).to.be.eq(0);
+  });
+
+  it('Gets effectiveness', () => {
+    expect(fighter.getEffectiveness(new MockFighter())).to.be.eq(effectVal.notQuiteEffective);
   });
 });

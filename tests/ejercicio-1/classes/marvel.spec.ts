@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Marvel, MarvelPlanet } from '../../../src/ejercicio-1/classes/marvel';
+import { Marvel} from '../../../src/ejercicio-1/classes/marvel';
+import { effectVal, Fighter } from '../../../src/ejercicio-1/classes/fighter';
 
 class MockHero extends Marvel {
   constructor() {
@@ -9,6 +10,10 @@ class MockHero extends Marvel {
 
   talk(): string {
     return `Mock Hero!`;
+  }
+
+  getEffectiveness(defender: Fighter): effectVal {
+    return effectVal.notQuiteEffective;
   }
 }
 

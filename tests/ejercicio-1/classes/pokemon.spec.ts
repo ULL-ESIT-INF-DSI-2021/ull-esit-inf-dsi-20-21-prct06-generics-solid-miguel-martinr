@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Pokemon, PokemonType } from '../../../src/ejercicio-1/classes/pokemon';
+import { Pokemon } from '../../../src/ejercicio-1/classes/pokemon';
+import { Fighter, effectVal } from '../../../src/ejercicio-1/classes/fighter';
 
 class MockPokemon extends Pokemon {
   constructor() {
@@ -9,6 +10,10 @@ class MockPokemon extends Pokemon {
 
   talk(): string {
     return `Mock Pokemon!`;
+  }
+
+  getEffectiveness(defender: Fighter): effectVal {
+    return effectVal.notQuiteEffective;
   }
 }
 

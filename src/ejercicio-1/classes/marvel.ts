@@ -1,6 +1,6 @@
 import { Fighter } from './fighter';
 
-export type MarvelPlanet = 'EARTH' | 'ASGARD' | 'TITAN' | 'ZenWhoberi';
+export type MarvelPlanet = 'EARTH' | 'ASGARD' | 'TITAN' | 'ZenWhoberi' | 'MARS';
 
 export abstract class Marvel extends Fighter {
   constructor(name: string, height: number, 

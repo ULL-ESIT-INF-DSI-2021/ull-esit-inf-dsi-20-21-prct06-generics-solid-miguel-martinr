@@ -1,3 +1,9 @@
+export enum effectVal {
+  superEffective = 2,
+  neutral = 1,
+  notQuiteEffective = 0.5
+}
+
 export abstract class Fighter {
   constructor(private name: string, private height: number,
       private weight: number, private attack: number,
@@ -64,5 +70,6 @@ export abstract class Fighter {
   }
 
   abstract talk(): string;
+  abstract getEffectiveness(defender: Fighter): effectVal;
 };
 

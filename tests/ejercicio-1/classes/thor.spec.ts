@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
 import { Thor } from '../../../src/ejercicio-1/classes/thor';
+import { effectVal } from '../../../src/ejercicio-1/classes/fighter';
 
  
 describe('Thor tests', () => {
@@ -13,5 +14,8 @@ describe('Thor tests', () => {
   });
   it('He is from Asgard', () => {
     expect(thor.getPlanet()).to.be.eq('ASGARD');
+  });
+  it('Gets effectiveness', () => {
+    expect(thor.getEffectiveness(new Thor())).to.be.eq(effectVal.superEffective);
   });
 });

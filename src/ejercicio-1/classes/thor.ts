@@ -1,4 +1,6 @@
+import { effectVal, Fighter } from "./fighter";
 import { Marvel } from "./marvel";
+import { Pokemon } from "./pokemon";
 
 
 export class Thor extends Marvel {
@@ -8,5 +10,9 @@ export class Thor extends Marvel {
 
   talk(): string {
     return `Fortunately, I am mighty!`;
+  }
+
+  getEffectiveness(defender: Fighter): effectVal {
+    return effectVal.superEffective;
   }
 };
