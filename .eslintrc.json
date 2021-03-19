@@ -22,6 +22,7 @@
       "max-len": "off",
       "guard-for-in": "off",
       "padded-blocks": "off",
-      "camelcase": "off"
+      "camelcase": "off",
+      "object-curly-spacing": "off"
     }
 }
