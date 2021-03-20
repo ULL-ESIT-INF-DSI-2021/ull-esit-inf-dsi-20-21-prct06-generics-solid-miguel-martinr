@@ -10,11 +10,11 @@ export class Velocity implements IsConvertible<number, VelocityUnit> {
   convertTo(unit: VelocityUnit): number {
     switch (unit) {
       case 'KM/H':
-        return this.convertToKMH(unit);
+        return this.convertToKMH();
       case 'MPH':
-        return this.convertToMPH(unit);
+        return this.convertToMPH();
       case 'M/S':
-        return this.convertToMS(unit);
+        return this.convertToMS();
     }
   }
 
@@ -30,7 +30,7 @@ export class Velocity implements IsConvertible<number, VelocityUnit> {
     return this.convertTo('M/S');
   }
 
-  private convertToKMH(unit: VelocityUnit): number {
+  private convertToKMH(): number {
     switch (this.currentUnit) {
       case 'KM/H':
         return this.data;
@@ -41,7 +41,7 @@ export class Velocity implements IsConvertible<number, VelocityUnit> {
     }
   }
 
-  private convertToMPH(unit: VelocityUnit): number {
+  private convertToMPH(): number {
     switch (this.currentUnit) {
       case 'KM/H':
         return this.data * 0.621371;
@@ -52,7 +52,7 @@ export class Velocity implements IsConvertible<number, VelocityUnit> {
     }
   }
 
-  private convertToMS(unit: VelocityUnit): number {
+  private convertToMS(): number {
     switch (this.currentUnit) {
       case 'KM/H':
         return this.data * 0.277778;
