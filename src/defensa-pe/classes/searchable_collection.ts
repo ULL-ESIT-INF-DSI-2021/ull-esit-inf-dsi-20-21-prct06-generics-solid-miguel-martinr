@@ -52,5 +52,5 @@ export abstract class SearchableCollection<ItemType> implements Collectable<Item
     return this.collection.length;
   }
 
-  abstract search(searchedItem: ItemType): ItemType[];
+  abstract search(searchedItem: unknown): ItemType[];
 }
