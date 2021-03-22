@@ -23,6 +23,7 @@
       "guard-for-in": "off",
       "padded-blocks": "off",
       "camelcase": "off",
-      "object-curly-spacing": "off"
+      "object-curly-spacing": "off",
+      "quotes": "off"
     }
 }
