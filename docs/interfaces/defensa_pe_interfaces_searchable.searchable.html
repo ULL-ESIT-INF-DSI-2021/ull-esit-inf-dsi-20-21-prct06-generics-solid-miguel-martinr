@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Streamable | Clases e interfaces genéricas</title>
+	<title>Searchable | Clases e interfaces genéricas</title>
 	<meta name="description" content="Documentation for Clases e interfaces genéricas">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,24 +55,31 @@
 					<a href="../modules.html">Clases e interfaces genéricas</a>
 				</li>
 				<li>
-					<a href="../modules/ejercicio_3_interfaces_streamable.html">ejercicio-3/interfaces/streamable</a>
+					<a href="../modules/defensa_pe_interfaces_searchable.html">defensa-pe/interfaces/searchable</a>
 				</li>
 				<li>
-					<a href="ejercicio_3_interfaces_streamable.streamable.html">Streamable</a>
+					<a href="defensa_pe_interfaces_searchable.searchable.html">Searchable</a>
 				</li>
 			</ul>
-			<h1>Interface Streamable&lt;StreamType&gt;</h1>
+			<h1>Interface Searchable&lt;ItemType&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Defines the shape of a generic searchable collection</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>StreamType</h4>
+						<h4>ItemType</h4>
 					</li>
 				</ul>
 			</section>
@@ -80,14 +87,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Streamable</span>
+						<span class="target">Searchable</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/ejercicio_3_classes_basic_streamable_collection.basicstreamablecollection.html" class="tsd-signature-type" data-tsd-kind="Class">BasicStreamableCollection</a></li>
+					<li><a href="../classes/defensa_pe_classes_searchable_collection.searchablecollection.html" class="tsd-signature-type" data-tsd-kind="Class">SearchableCollection</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -97,8 +104,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="ejercicio_3_interfaces_streamable.streamable.html#getcollection" class="tsd-kind-icon">get<wbr>Collection</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="ejercicio_3_interfaces_streamable.streamable.html#setcollection" class="tsd-kind-icon">set<wbr>Collection</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="defensa_pe_interfaces_searchable.searchable.html#search" class="tsd-kind-icon">search</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,42 +113,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="getcollection" class="tsd-anchor"></a>
-					<h3>get<wbr>Collection</h3>
+					<a name="search" class="tsd-anchor"></a>
+					<h3>search</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Collection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StreamType</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">search<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ItemType</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ItemType</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/620978f/src/ejercicio-3/interfaces/streamable.ts#L3">ejercicio-3/interfaces/streamable.ts:3</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">StreamType</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="setcollection" class="tsd-anchor"></a>
-					<h3>set<wbr>Collection</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Collection<span class="tsd-signature-symbol">(</span>newCollection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StreamType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/620978f/src/ejercicio-3/interfaces/streamable.ts#L4">ejercicio-3/interfaces/streamable.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/620978f/src/defensa-pe/interfaces/searchable.ts#L5">defensa-pe/interfaces/searchable.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>newCollection: <span class="tsd-signature-type">StreamType</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>item: <span class="tsd-signature-type">ItemType</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ItemType</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -155,7 +144,7 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/ejercicio_3_interfaces_streamable.html">ejercicio-<wbr>3/interfaces/streamable</a>
+						<a href="../modules/defensa_pe_interfaces_searchable.html">defensa-<wbr>pe/interfaces/searchable</a>
 					</li>
 				</ul>
 			</nav>
@@ -164,13 +153,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="ejercicio_3_interfaces_streamable.streamable.html" class="tsd-kind-icon">Streamable</a>
+						<a href="defensa_pe_interfaces_searchable.searchable.html" class="tsd-kind-icon">Searchable</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="ejercicio_3_interfaces_streamable.streamable.html#getcollection" class="tsd-kind-icon">get<wbr>Collection</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="ejercicio_3_interfaces_streamable.streamable.html#setcollection" class="tsd-kind-icon">set<wbr>Collection</a>
+								<a href="defensa_pe_interfaces_searchable.searchable.html#search" class="tsd-kind-icon">search</a>
 							</li>
 						</ul>
 					</li>
