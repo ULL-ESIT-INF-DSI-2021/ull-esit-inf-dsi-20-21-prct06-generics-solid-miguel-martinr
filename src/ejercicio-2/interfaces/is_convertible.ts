@@ -1,6 +1,6 @@
 
-export interface IsConvertible<T, U> {
-  data: T;
-  currentUnit: U;
-  convertTo(unit: U): T;
+export interface IsConvertible<DataType, UnitType> {
+  data: DataType;
+  currentUnit: UnitType;
+  convertTo(unit: UnitType): DataType;
 }
