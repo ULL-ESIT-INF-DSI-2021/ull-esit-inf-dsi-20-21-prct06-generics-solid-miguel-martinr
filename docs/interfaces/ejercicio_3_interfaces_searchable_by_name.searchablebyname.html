@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IsConvertible | Clases e interfaces genéricas</title>
+	<title>SearchableByName | Clases e interfaces genéricas</title>
 	<meta name="description" content="Documentation for Clases e interfaces genéricas">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">Clases e interfaces genéricas</a>
 				</li>
 				<li>
-					<a href="../modules/ejercicio_2_interfaces_is_convertible.html">ejercicio-2/interfaces/is_convertible</a>
+					<a href="../modules/ejercicio_3_interfaces_searchable_by_name.html">ejercicio-3/interfaces/searchable_by_name</a>
 				</li>
 				<li>
-					<a href="ejercicio_2_interfaces_is_convertible.isconvertible.html">IsConvertible</a>
+					<a href="ejercicio_3_interfaces_searchable_by_name.searchablebyname.html">SearchableByName</a>
 				</li>
 			</ul>
-			<h1>Interface IsConvertible&lt;T, U&gt;</h1>
+			<h1>Interface SearchableByName&lt;SearchableType&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,10 +72,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T</h4>
-					</li>
-					<li>
-						<h4>U</h4>
+						<h4>SearchableType</h4>
 					</li>
 				</ul>
 			</section>
@@ -83,15 +80,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IsConvertible</span>
+						<span class="target">SearchableByName</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/ejercicio_2_classes_mass.mass.html" class="tsd-signature-type" data-tsd-kind="Class">Mass</a></li>
-					<li><a href="../classes/ejercicio_2_classes_velocity.velocity.html" class="tsd-signature-type" data-tsd-kind="Class">Velocity</a></li>
+					<li><a href="../classes/ejercicio_3_classes_basic_streamable_collection.basicstreamablecollection.html" class="tsd-signature-type" data-tsd-kind="Class">BasicStreamableCollection</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -99,66 +95,36 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ejercicio_2_interfaces_is_convertible.isconvertible.html#currentunit" class="tsd-kind-icon">current<wbr>Unit</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ejercicio_2_interfaces_is_convertible.isconvertible.html#data" class="tsd-kind-icon">data</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="ejercicio_2_interfaces_is_convertible.isconvertible.html#convertto" class="tsd-kind-icon">convert<wbr>To</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="ejercicio_3_interfaces_searchable_by_name.searchablebyname.html#searchbyname" class="tsd-kind-icon">search<wbr>ByName</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="currentunit" class="tsd-anchor"></a>
-					<h3>current<wbr>Unit</h3>
-					<div class="tsd-signature tsd-kind-icon">current<wbr>Unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">U</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/3a51bc8/src/ejercicio-2/interfaces/is_convertible.ts#L4">ejercicio-2/interfaces/is_convertible.ts:4</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/3a51bc8/src/ejercicio-2/interfaces/is_convertible.ts#L3">ejercicio-2/interfaces/is_convertible.ts:3</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="convertto" class="tsd-anchor"></a>
-					<h3>convert<wbr>To</h3>
+					<a name="searchbyname" class="tsd-anchor"></a>
+					<h3>search<wbr>ByName</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">convert<wbr>To<span class="tsd-signature-symbol">(</span>unit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+						<li class="tsd-signature tsd-kind-icon">search<wbr>ByName<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchableType</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/3a51bc8/src/ejercicio-2/interfaces/is_convertible.ts#L5">ejercicio-2/interfaces/is_convertible.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct06-generics-solid-miguel-martinr/blob/3a51bc8/src/ejercicio-3/interfaces/searchable_by_name.ts#L3">ejercicio-3/interfaces/searchable_by_name.ts:3</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>unit: <span class="tsd-signature-type">U</span></h5>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SearchableType</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -171,7 +137,7 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/ejercicio_2_interfaces_is_convertible.html">ejercicio-<wbr>2/interfaces/is_<wbr>convertible</a>
+						<a href="../modules/ejercicio_3_interfaces_searchable_by_name.html">ejercicio-<wbr>3/interfaces/searchable_<wbr>by_<wbr>name</a>
 					</li>
 				</ul>
 			</nav>
@@ -180,16 +146,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="ejercicio_2_interfaces_is_convertible.isconvertible.html" class="tsd-kind-icon">Is<wbr>Convertible</a>
+						<a href="ejercicio_3_interfaces_searchable_by_name.searchablebyname.html" class="tsd-kind-icon">Searchable<wbr>ByName</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ejercicio_2_interfaces_is_convertible.isconvertible.html#currentunit" class="tsd-kind-icon">current<wbr>Unit</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ejercicio_2_interfaces_is_convertible.isconvertible.html#data" class="tsd-kind-icon">data</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="ejercicio_2_interfaces_is_convertible.isconvertible.html#convertto" class="tsd-kind-icon">convert<wbr>To</a>
+								<a href="ejercicio_3_interfaces_searchable_by_name.searchablebyname.html#searchbyname" class="tsd-kind-icon">search<wbr>ByName</a>
 							</li>
 						</ul>
 					</li>
@@ -206,7 +166,6 @@
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
