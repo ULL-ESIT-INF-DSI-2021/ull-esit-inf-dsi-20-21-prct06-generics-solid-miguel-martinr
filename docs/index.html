@@ -70,6 +70,122 @@
 				<a href="#1-el-combate-definitivo" id="1-el-combate-definitivo" style="color: inherit; text-decoration: none;">
 					<h2><strong>1. El combate definitivo</strong></h2>
 				</a>
+				<p>Partiendo del desarrollo de este <a href="https://ull-esit-inf-dsi-2021.github.io/ull-esit-inf-dsi-20-21-prct05-objects-classes-interfaces-miguel-martinr/#1-pokedex">ejercicio</a> en el que hemos desarrollado una Pokedex y una clase que permite simular combates entre Pokémons, crearemos ahora un conjunto de clases que permitan simular combates de personajes de distintos universos (Marvel, Pokemon, etc).</p>
+				<a href="#luchadores" id="luchadores" style="color: inherit; text-decoration: none;">
+					<h3><strong>Luchadores</strong></h3>
+				</a>
+				<p>En primer lugar crearemos la clase abstracta <code>Fighter</code>. Esta clase almacenará datos comunes a todos los luchadores tales como: nombre, altura, peso, valores de ataque, defesa y velocidad y la cantidad de vida (hitPoints). Además, definirá un método abstracto llamado <code>talk</code>, que retornará una <code>string</code>; este método deberá ser implementado por todos los descendientes instanciables de esta clase y servirá para que cada personaje diga su <em>catching phrase</em>.</p>
+				<p>Esta clase también definirá un método abstracto llamado <code>getEffectiveness</code>, que recibirá como parámetro otro Fighter y retornará la efectividad que se aplicaría en caso de un ataque del objeto invocante al objeto que se pasa por parámetro. De esta forma le quitamos la responsabilidad de calcular dicha efectividad a la clase <code>Combat</code> (que era la responsable de calcularla en el ejercicio de la práctica anterior) y la delegamos a las clases de niveles más bajos en la jerarquía. con este diseño podríamos, por ejemplo, implementar determinadas reglas para todos los luchadores de un universo en concreto o hacer que cada luchador sea responsable de recordar y aplicar sus propias reglas.</p>
+				<p>Una vez tengamos definida nuestra clase <code>Figther</code>, podremos definir distintos universos que herederán de ella. Estos universos serán también clases abstractas y se encargarán de definir atributos y métodos que deben ser implementados por los personajes de cada uno de los universos.</p>
+				<p>En este caso, definiremos los universos <code>Marvel</code> y <code>Pokemon</code>. </p>
+				<a href="#marvel" id="marvel" style="color: inherit; text-decoration: none;">
+					<h4><strong>Marvel</strong></h4>
+				</a>
+				<p>Esta clase será la clase padre de todos aquellos personajes pertenecientes al universo Marvel, y por lo tanto definirá el atributo <code>planet: MarvelPlanet</code>, que identificará el planeta del que procede un determinado personaje.</p>
+				<p><strong><em>Nota:</em></strong> He definido <code>MarvelPlanet</code> como una unión de tipos en la que se encuentran la tierra, Asgard, Titán y Zen Whoberi.</p>
+				<a href="#pokemon" id="pokemon" style="color: inherit; text-decoration: none;">
+					<h4><strong>Pokemon</strong></h4>
+				</a>
+				<p>De forma similar, esta clase definirá un atributo <code>type: PokemonType</code> igual al utilizado en el ejercicio 1 de la práctica anterior.</p>
+				<p>Y por último, procederemos a crear las clases detalladas de cada uno de los personajes que integrarán nuestro macro universo. Esto lo haremos creando clases hijas de cada uno de los universos e implementando el método <code>talk</code> y los atributos <code>planet</code> y <code>pokemonType</code> según corresponda. Asimismo, implementaremos el método <code>getEffectiveness</code> en cada uno, para que sea responsabilidad de cada personaje calcular su efectividad.</p>
+				<p>De esta forma, obtendríamos un esquema como el siguiente:</p>
+				<p><img src="media/fighters-scheme.svg" alt="Esquema de luchadores"></p>
+				<p>Como se mencionó anteriormente, en esta implementación cada personaje es responsable de calcular su efectividad a modo demostrativo. Sin embargo, podríamos mover dicho método a sus clases padres (Marvel y Pokémon) si así lo quisiéramos y sobreescribirlo solo en los casos necesarios.</p>
+				<a href="#combate" id="combate" style="color: inherit; text-decoration: none;">
+					<h3><strong>Combate</strong></h3>
+				</a>
+				<p>Redefiniremos la clase <code>Combat</code> como una clase genérica que recibirá argumentos de tipo genérico indicando la naturaleza de los luchadores:</p>
+				<pre><code class="language-typescript"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">class</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Combat</span><span style="color: #24292E">&lt;</span><span style="color: #6F42C1">A</span><span style="color: #24292E"> </span><span style="color: #D73A49">extends</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Fighter</span><span style="color: #24292E">, </span><span style="color: #6F42C1">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">extends</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Fighter</span><span style="color: #24292E">&gt; {</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">constructor</span><span style="color: #24292E">(</span><span style="color: #D73A49">private</span><span style="color: #24292E"> </span><span style="color: #E36209">fighterA</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">A</span><span style="color: #24292E">, </span><span style="color: #D73A49">private</span><span style="color: #24292E"> </span><span style="color: #E36209">fighterB</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">B</span><span style="color: #24292E">) {</span>
+
+<span style="color: #24292E">  }</span>
+<span style="color: #24292E">  . . . </span>
+</code></pre>
+				<p>Así, podremos obtener instancias que solo admitan determinadas configuraciones de luchadores: dos de universos diferentes, dos del mismo universo o dos de cualquier universo, etc...</p>
+				<p>La clase <code>Combat</code> almacenará los contrincantes e implementará los siguientes métodos:</p>
+				<ul>
+					<li><strong><code>calcDamage</code></strong>: Encargado de aplicar una fórmula matemática para calcular el daño ocasionado dependiendo de los valores de ataque, defensa y efectividad.</li>
+					<li><strong><code>damageCasused</code></strong>: Encargado de pasar los valores de ataque y defensa de los contrincantes a la función matemática que calcula el daño.</li>
+					<li><strong><code>start</code></strong>: Empieza una batalla entre los contrincantes turnando los ataques hasta que se agote la vida de uno de ellos. Además, imprime el estado actual tras cada ataque.</li>
+					<li><strong><code>printStatus</code></strong>: Imprime por consola el estado actual de los contrincantes (hitPoints) junto a una <code>catching phrase</code> de cada uno de ellos.</li>
+				</ul>
+				<p><img src="media/combat-scheme.svg" alt="Esquema de Combat"></p>
+				<p>A continuación, una demostración de una batalla entre un <strong>Pikachu</strong> y un <strong>Thor</strong>:</p>
+				<pre><code class="language-typescript"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">combat</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Combat</span><span style="color: #24292E">(</span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Thor</span><span style="color: #24292E">(), </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Pikachu</span><span style="color: #24292E">());</span>
+<span style="color: #24292E">combat.</span><span style="color: #6F42C1">start</span><span style="color: #24292E">();</span>
+</code></pre>
+				<p><img src="media/combat-demo.gif" alt="Demo combat"></p>
+				<a href="#lógica-de-combate" id="lógica-de-combate" style="color: inherit; text-decoration: none;">
+					<h4><strong>Lógica de combate</strong></h4>
+				</a>
+				<p>Como se mencionó anteriormente, en esta implementación cada personaje es responsable de calcular su efectividad dependiendo del personaje al que va a atacar. Las reglas definidas son las siguientes:</p>
+				<ul>
+					<li><strong>Si el atacante es Asgardiano, siempre será muy efectivo</strong></li>
+					<li><strong>En otro caso: Pokémon &gt; Marvel</strong></li>
+				</ul>
+				<table>
+					<thead>
+						<tr>
+							<th>* Si ambos contrincantes son Pokémons</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>Fuego &gt; Hierba</td>
+						</tr>
+						<tr>
+							<td>Fuego &lt; agua</td>
+						</tr>
+						<tr>
+							<td>Fuego = Eléctrico</td>
+						</tr>
+						<tr>
+							<td>Agua &lt; Hierba</td>
+						</tr>
+						<tr>
+							<td>Hierba = Eléctrico</td>
+						</tr>
+				</tbody></table>
+				<table>
+					<thead>
+						<tr>
+							<th>* Si ambos contrincantes son de Marvel</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>Asgard &gt; Todos</td>
+						</tr>
+						<tr>
+							<td>Earth &gt; Titan</td>
+						</tr>
+						<tr>
+							<td>Earth = Zen whoberi</td>
+						</tr>
+				</tbody></table>
+				<ul>
+					<li><strong>En cualquier otro caso, la efectividad es neutral</strong></li>
+				</ul>
+				<p>Ejemplo de la implementación de la lógica de combate para el objeto <code>IronMan</code>:</p>
+				<pre><code class="language-typescript"><span style="color: #24292E">  </span><span style="color: #6F42C1">getEffectiveness</span><span style="color: #24292E">(defender: Fighter): effectVal {</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">if</span><span style="color: #24292E"> (defender </span><span style="color: #D73A49">instanceof</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Pokemon</span><span style="color: #24292E">) </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.notQuiteEffective;</span>
+
+<span style="color: #24292E">    </span><span style="color: #D73A49">if</span><span style="color: #24292E"> (defender </span><span style="color: #D73A49">instanceof</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Marvel</span><span style="color: #24292E">) {</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">switch</span><span style="color: #24292E"> (defender.</span><span style="color: #6F42C1">getPlanet</span><span style="color: #24292E">()) {</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;ASGARD&#039;</span><span style="color: #24292E">: </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.notQuiteEffective;</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;EARTH&#039;</span><span style="color: #24292E">: </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.notQuiteEffective;</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;TITAN&#039;</span><span style="color: #24292E">: </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.superEffective;</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;ZenWhoberi&#039;</span><span style="color: #24292E">: </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.neutral;</span>
+<span style="color: #24292E">      }</span>
+<span style="color: #24292E">    }</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.neutral;</span>
+<span style="color: #24292E">  }</span>
+</code></pre>
+				<a href="#pokedex-genérica" id="pokedex-genérica" style="color: inherit; text-decoration: none;">
+					<h3><strong>Pokedex genérica</strong></h3>
+				</a>
+				<p>Por último, implementremos una clase <code>MultiversePokedex</code> que sea capaz de almacenar personajes de diferentes universos.</p>
+				<p>Para ello, primero modifcaremos la clase <code>Pokedex</code> creada en la práctica anterior y la haremos genérica, de modo que podamos especificar el tipo de luchador que almacenará. Dicho tipo extendrá a la clase <code>Fighter</code>, para así restringirlo a personajes pertenecientes a los universos conocidos.</p>
+				<p>A continuación, haremos que <code>MultiversePokedex</code> extienda a <code>Pokedex</code> y que pase <code>Fighter</code> como su parámetro de tipo genérico para que sea capaz de almacenar personajes de todos los universos:
+				<img src="media/pokedex-scheme.svg" alt="Esquema pokedex"></p>
 				<a href="#2-conversor-de-unidades" id="2-conversor-de-unidades" style="color: inherit; text-decoration: none;">
 					<h2><strong>2. Conversor de unidades</strong></h2>
 				</a>

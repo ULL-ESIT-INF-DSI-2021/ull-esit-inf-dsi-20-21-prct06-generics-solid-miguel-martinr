@@ -1,19 +1,41 @@
 import { effectVal, Fighter } from "./fighter";
 import 'colors';
+
+/**
+ * Represents a combat between two generic fighters
+ */
 export class Combat<A extends Fighter, B extends Fighter> {
   constructor(private fighterA: A, private fighterB: B) {
 
   }
 
+  /**
+   * Applies a math formula to calculate damage
+   * @param attack 
+   * @param defense 
+   * @param effectiveness 
+   * @returns damage caused on an attack
+   */
   private calcDamage(attack: number, defense: number, effectiveness: effectVal) {
     return 50 * (attack / defense) * effectiveness;
   }
 
+  /**
+   * Performs an attack from attacker to defender and returns the damage caused
+   * @param attacker 
+   * @param defender 
+   * @returns 
+   */
   private damageCaused(attacker: A | B, defender: A | B): number {
     return this.calcDamage(attacker.getAttack(), defender.getDefense(), 
         attacker.getEffectiveness(defender));
   }
 
+
+  /**
+   * Starts a battle between the two contrincants
+   * @returns Battle log
+   */
   start(): string[] {
     const battleLog: string[] = [];
 
@@ -55,6 +77,12 @@ export class Combat<A extends Fighter, B extends Fighter> {
     return battleLog;
   }
 
+  /**
+   * Logs the current status of contrincants
+   * @param attacker 
+   * @param defender 
+   * @returns 
+   */
   private printStatus(attacker: A | B = this.fighterA, defender: A | B = this.fighterB): string {
     return `${attacker.getName()} Attacked! ${attacker.talk()} HP: ${attacker.getHitPoints()}\n`.green +
             `${defender.getName()} Is under attack! ${defender.talk()} HP: ${defender.getHitPoints()}\n\n`.red;

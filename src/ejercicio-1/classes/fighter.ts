@@ -4,6 +4,9 @@ export enum effectVal {
   notQuiteEffective = 0.5
 }
 
+/**
+ * Represents a generic fighter
+ */
 export abstract class Fighter {
   constructor(private name: string, private height: number,
       private weight: number, private attack: number,
@@ -69,7 +72,15 @@ export abstract class Fighter {
     return this.hitPoints;
   }
 
+  /**
+   * Returns a catching phrase
+   */
   abstract talk(): string;
+
+  /**
+   * Calculates efectiveness of an attack to the defender
+   * @param defender 
+   */
   abstract getEffectiveness(defender: Fighter): effectVal;
 };
 
