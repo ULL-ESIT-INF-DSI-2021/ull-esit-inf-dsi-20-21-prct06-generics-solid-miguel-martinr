@@ -88,7 +88,7 @@ Como se mencionó anteriormente, en esta implementación cada personaje es respo
 
 * **En cualquier otro caso, la efectividad es neutral**
 
-Ejemplo de la implementación de la lógica de combate para el objeto `IronMan`:
+Ejemplo de la implementación de la lógica de combate para la clase `IronMan`:
 
 ```typescript
   getEffectiveness(defender: Fighter): effectVal {
