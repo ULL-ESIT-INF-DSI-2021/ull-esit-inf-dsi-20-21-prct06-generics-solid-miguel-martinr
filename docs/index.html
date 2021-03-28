@@ -164,7 +164,7 @@
 				<ul>
 					<li><strong>En cualquier otro caso, la efectividad es neutral</strong></li>
 				</ul>
-				<p>Ejemplo de la implementación de la lógica de combate para el objeto <code>IronMan</code>:</p>
+				<p>Ejemplo de la implementación de la lógica de combate para la clase <code>IronMan</code>:</p>
 				<pre><code class="language-typescript"><span style="color: #24292E">  </span><span style="color: #6F42C1">getEffectiveness</span><span style="color: #24292E">(defender: Fighter): effectVal {</span>
 <span style="color: #24292E">    </span><span style="color: #D73A49">if</span><span style="color: #24292E"> (defender </span><span style="color: #D73A49">instanceof</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Pokemon</span><span style="color: #24292E">) </span><span style="color: #D73A49">return</span><span style="color: #24292E"> effectVal.notQuiteEffective;</span>
 
@@ -189,9 +189,121 @@
 				<a href="#2-conversor-de-unidades" id="2-conversor-de-unidades" style="color: inherit; text-decoration: none;">
 					<h2><strong>2. Conversor de unidades</strong></h2>
 				</a>
+				<p>A continuación, desarrollaremos un conjunto de clases que nos permitan realizar conversiones de unidades o sistemas de medición para distintas magnitudes físicas. En concreto, crearemos un sistema inicialmente integrado por dos magnitutdes físicas: <strong>Masa</strong> y <strong>Velocidad</strong>, y que será fácilmente extendible mediante la adición de nuevas clases.</p>
+				<p>El diseño para este ejercicio consiste en el desarrollo de una interfaz genérica llamada <code>isConvertible</code> que define la siguiente forma:</p>
+				<pre><code class="language-typescript"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">interface</span><span style="color: #24292E"> </span><span style="color: #6F42C1">IsConvertible</span><span style="color: #24292E">&lt;</span><span style="color: #6F42C1">DataType</span><span style="color: #24292E">, </span><span style="color: #6F42C1">UnitType</span><span style="color: #24292E">&gt; {</span>
+<span style="color: #24292E">  </span><span style="color: #E36209">data</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">DataType</span><span style="color: #24292E">;</span>
+<span style="color: #24292E">  </span><span style="color: #E36209">currentUnit</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">UnitType</span><span style="color: #24292E">;</span>
+<span style="color: #24292E">  </span><span style="color: #6F42C1">convertTo</span><span style="color: #24292E">(</span><span style="color: #E36209">unit</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">UnitType</span><span style="color: #24292E">)</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">DataType</span><span style="color: #24292E">;</span>
+<span style="color: #24292E">}</span>
+</code></pre>
+				<p>Donde <strong><code>UnitType</code></strong> especifica el conjunto de unidades de medida con el que se va a trabajar; por ejemplo: metros, centímetros y kilómetros; y <strong><code>DataType</code></strong> especifica el tipo del dato a convertir, por ejemplo: number, string, etc...</p>
+				<p>Esta interfaz define un atributo llamado <code>data</code> que representará el dato a almacenar y sobre el que se ejecutarán las transformaciones. Es importante recalcar que al estar definido en la interfaz, dicho dato será necesariamente público en aquellas clases que implementen la interfaz. En caso de que sea necesario definirlo como un atributo privado podríamos evitar definirlo en la interfaz y limitar el contenido de la misma a los métodos que gestionan el atributo.</p>
+				<p>Asimismo, define un atributo llamado <code>currentUnit</code> que almacena la unidad de medida bajo la cual está representado el dato actualmente.</p>
+				<p>Por último, el método <code>convertTo</code> recibe como parámetro la unidad de medida a la cual se quiere transformar el dato almacenado y retorna dicho valor ya transformado.</p>
+				<p>Veamos el ejemplo de implementación para la Velocidad:</p>
+				<ul>
+					<li><p>La clase <code>Velocity</code> implementa la interfaz <code>isConvertibe</code> pasando como argumentos de tipo genérico el tipo <code>number</code> y la unión de tipos <code>VelocityUnit</code>, que incluye metros por segundo, kilómetros por hora y millas por hora. El método <code>convertTo</code> recibe como parámetro un valor de tipo <code>VelocityUnit</code> y, mediante un switch-case, invoca uno de los métodos que convierte el dato almacenado a la unidad deseada:</p>
+					</li>
+					<li><pre><code class="language-typescript"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">type</span><span style="color: #24292E"> </span><span style="color: #6F42C1">VelocityUnit</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;KM/H&#039;</span><span style="color: #24292E"> </span><span style="color: #D73A49">|</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;MPH&#039;</span><span style="color: #24292E"> </span><span style="color: #D73A49">|</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;M/S&#039;</span><span style="color: #24292E">;</span>
+
+<span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">class</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Velocity</span><span style="color: #24292E"> </span><span style="color: #D73A49">implements</span><span style="color: #24292E"> </span><span style="color: #6F42C1">IsConvertible</span><span style="color: #24292E">&lt;</span><span style="color: #005CC5">number</span><span style="color: #24292E">, </span><span style="color: #6F42C1">VelocityUnit</span><span style="color: #24292E">&gt; {</span>
+<span style="color: #D73A49">constructor</span><span style="color: #24292E">(</span><span style="color: #D73A49">public</span><span style="color: #24292E"> </span><span style="color: #D73A49">readonly</span><span style="color: #24292E"> </span><span style="color: #E36209">data</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #005CC5">number</span><span style="color: #24292E">, </span><span style="color: #D73A49">readonly</span><span style="color: #24292E"> </span><span style="color: #E36209">currentUnit</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">VelocityUnit</span><span style="color: #24292E">) {}</span>
+
+<span style="color: #6F42C1">convertTo</span><span style="color: #24292E">(</span><span style="color: #E36209">unit</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">VelocityUnit</span><span style="color: #24292E">)</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #005CC5">number</span><span style="color: #24292E"> {</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">switch</span><span style="color: #24292E"> (unit) {</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;KM/H&#039;</span><span style="color: #24292E">:</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.</span><span style="color: #6F42C1">convertToKMH</span><span style="color: #24292E">();</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;MPH&#039;</span><span style="color: #24292E">:</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.</span><span style="color: #6F42C1">convertToMPH</span><span style="color: #24292E">();</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;M/S&#039;</span><span style="color: #24292E">:</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.</span><span style="color: #6F42C1">convertToMS</span><span style="color: #24292E">();</span>
+<span style="color: #24292E">  }</span>
+<span style="color: #24292E">}</span>
+<span style="color: #24292E">  .  .  .</span>
+
+<span style="color: #D73A49">private</span><span style="color: #24292E"> </span><span style="color: #6F42C1">convertToKMH</span><span style="color: #24292E">()</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #005CC5">number</span><span style="color: #24292E"> {</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">switch</span><span style="color: #24292E"> (</span><span style="color: #005CC5">this</span><span style="color: #24292E">.currentUnit) {</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;KM/H&#039;</span><span style="color: #24292E">:</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.data;</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;M/S&#039;</span><span style="color: #24292E">:</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.data </span><span style="color: #D73A49">*</span><span style="color: #24292E"> </span><span style="color: #005CC5">3.6</span><span style="color: #24292E">;</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">case</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;MPH&#039;</span><span style="color: #24292E">:</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.data </span><span style="color: #D73A49">*</span><span style="color: #24292E"> </span><span style="color: #005CC5">1.60934</span><span style="color: #24292E">;</span>
+<span style="color: #24292E">  }</span>
+<span style="color: #24292E">}</span>
+<span style="color: #24292E">  .  .  .</span>
+</code></pre>
+					</li>
+				</ul>
+				<p>Además, define una serie de métodos que facilitan la conversión entre unidades de medida, por ejemplo:</p>
+				<pre><code class="language-typescript"><span style="color: #24292E">  .  .  .</span>
+<span style="color: #6F42C1">toKMH</span><span style="color: #24292E">(): number {</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">this</span><span style="color: #24292E">.</span><span style="color: #6F42C1">convertTo</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;KM/H&#039;</span><span style="color: #24292E">);</span>
+<span style="color: #24292E">}</span>
+<span style="color: #24292E">  .  .  .</span>
+</code></pre>
+				<p>De modo que su uso sea de la forma:</p>
+				<pre><code class="language-typescript"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">vel</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Velocity</span><span style="color: #24292E">(</span><span style="color: #005CC5">100</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;KM/H&#039;</span><span style="color: #24292E">);</span>
+
+<span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(vel.</span><span style="color: #6F42C1">toMPH</span><span style="color: #24292E">(), </span><span style="color: #032F62">&#039;MPH&#039;</span><span style="color: #24292E">);</span>
+<span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(vel.</span><span style="color: #6F42C1">toMS</span><span style="color: #24292E">(), </span><span style="color: #032F62">&#039;M/S&#039;</span><span style="color: #24292E">);</span>
+</code></pre>
+				<p><img src="media/converter-demo.jpg" alt="Converter demo"></p>
 				<a href="#3-dsiflix" id="3-dsiflix" style="color: inherit; text-decoration: none;">
 					<h2><strong>3. DSIflix</strong></h2>
 				</a>
+				<p>Para este ejercicio diseñaremos el modelo de datos de una plataforma de vídeo en streaming.</p>
+				<ul>
+					<li>Definiremos una interfaz genérica llamada <code>Streamable&lt;StreamType&gt;</code> que definirá algunos de los métodos que implementa una colección de emisiones. Esta interfaz recibirá como argumento de genérico el tipo de dato de las emisiones de la colección (<code>StreamType</code>). Los métodos que definirá son:<ul>
+							<li><code>getCollection() StreamType[]</code>: Devuelve la colección de emisiones.</li>
+							<li><code>setCollection(newCollection StreamType[])</code> : Actualiza la colección de emisiones.</li>
+						</ul>
+					</li>
+				</ul>
+				<p>Además, para cumplir con el <code>Interface Segregation Principle</code>, añadiremos otras dos interfaces que definen más métodos a implementar por colecciones de emisiones:</p>
+				<ul>
+					<li><strong>SearchableByName<Searchresult></strong>: definirá el método <code>searchByName</code>, que recibirá un nombre y devolverá un vector de elementos <code>SearchResult</code> con los elementos cuyo nombre coincida con el término de búsqueda.</li>
+					<li><strong>SearchableByYear<SearchResult></strong>: de forma similar a la interfaz anterior, definirá el método <code>searchByYear</code>, que recibirá como argumento el año como un <code>number</code>, y retornará un vector con los resultados.</li>
+				</ul>
+				<p>Posteriormente desarrollaremos la clase abstracta genércia <code>BasicStreamableCollection</code>, que implementará las interfaces anteriormente mencionadas y recibirá como argumento de tipo genérico el tipo de elementos de los que estará compuesta la colección a almacenar. También definirá la colección como tal, que consistirá en un vector del tipo genérico pasado como argumento. Además, implementará el setter y getter para dicho atributo y definirá como asbtractos los métodos de las interfaces <code>SearchableByName</code> y <code>SearchableByYear</code>.</p>
+				<p>En este punto, crearemos una jerarquía de clases aparte para representar producciones audiovisuales tales que podamos utilizar dichas clases para definir clases detalladas hijas de la clase <code>BasicStreamabaleCollection</code>.</p>
+				<p>Esta jerarquía seguirá el siguiente esquema:
+				<img src="media/ej3-prod-hierarchy.svg" alt="Jerarquía producciones"></p>
+				<p>De esta forma podemos implementar las clases <code>SeriesCollection</code> y <code>MovieCollection</code>:</p>
+				<ul>
+					<li><code>SeriesCollection</code> extiende a <code>BasicStreamabaleCollection</code> pasándole como argumento de tipo genérico la clase <code>Series</code>. </li>
+					<li><code>MovieCollection</code> extiende a <code>BasicStreamabaleCollection</code> pasándole como argumento de tipo genérico la clase <code>Movie</code>. </li>
+				</ul>
+				<p>Ambas clases implementan los métodos definidos como abstractos en su superclase.</p>
+				<p>Es importante recalcar que debido a que el parámetro genérico de tipo no está restringido en la superclase, no se pueden implementar los métodos de las interfaces <code>Searchable</code>, ya que los tipos podrían no contener los atributos necesarios. En esta implementación, se ha optado por no restringir el parámetro de tipo genérico para evidenciar dicho problema, que podría ser fácilmente resuelto haciendo que el parámetro de tipo genérico extienda a la clase <code>AudioVisualProduction</code>.</p>
+				<p>Ejemplo de uso:</p>
+				<pre><code class="language-typescript"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">movies</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> [</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Movie</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;Blade Runner 2049&#039;</span><span style="color: #24292E">, </span><span style="color: #005CC5">2017</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;ACTION&#039;</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;PROducer1&#039;</span><span style="color: #24292E">,</span>
+<span style="color: #24292E">      [</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Actor</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;Dave&#039;</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;Bautista&#039;</span><span style="color: #24292E">, </span><span style="color: #005CC5">1960</span><span style="color: #24292E">), </span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Actor</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;Ryan&#039;</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;Gosling&#039;</span><span style="color: #24292E">, </span><span style="color: #005CC5">1980</span><span style="color: #24292E">),</span>
+<span style="color: #24292E">      ],</span>
+<span style="color: #24292E">      </span><span style="color: #005CC5">164</span><span style="color: #24292E"> </span><span style="color: #D73A49">*</span><span style="color: #24292E"> </span><span style="color: #005CC5">60</span><span style="color: #24292E">),</span>
+
+<span style="color: #24292E">  </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Movie</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;Togo&#039;</span><span style="color: #24292E">, </span><span style="color: #005CC5">2019</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;DRAMA&#039;</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;Producer2&#039;</span><span style="color: #24292E">,</span>
+<span style="color: #24292E">      [</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Actor</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;Christopher&#039;</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;Heyerdahl&#039;</span><span style="color: #24292E">, </span><span style="color: #005CC5">1970</span><span style="color: #24292E">),</span>
+<span style="color: #24292E">        </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Actor</span><span style="color: #24292E">(</span><span style="color: #032F62">&#039;Willem&#039;</span><span style="color: #24292E">, </span><span style="color: #032F62">&#039;Dafoe&#039;</span><span style="color: #24292E">, </span><span style="color: #005CC5">1950</span><span style="color: #24292E">),</span>
+<span style="color: #24292E">      ],</span>
+<span style="color: #24292E">      </span><span style="color: #005CC5">113</span><span style="color: #24292E"> </span><span style="color: #D73A49">*</span><span style="color: #24292E"> </span><span style="color: #005CC5">60</span><span style="color: #24292E">),</span>
+<span style="color: #24292E">];</span>
+
+<span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">movieCollection</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">MovieCollection</span><span style="color: #24292E">(movies);</span>
+
+<span style="color: #24292E">console.</span><span style="color: #6F42C1">table</span><span style="color: #24292E">(movieCollection.</span><span style="color: #6F42C1">getCollection</span><span style="color: #24292E">());</span>
+<span style="color: #24292E">console.</span><span style="color: #6F42C1">table</span><span style="color: #24292E">(movieCollection.</span><span style="color: #6F42C1">searchByYear</span><span style="color: #24292E">(</span><span style="color: #005CC5">2017</span><span style="color: #24292E">));</span>
+</code></pre>
+				<p><img src="media/dsflix-demo.jpg" alt="Demo dsflix"></p>
+				<a href="#conclusionesx" id="conclusionesx" style="color: inherit; text-decoration: none;">
+					<h2><strong>Conclusionesx</strong></h2>
+				</a>
+				<p>Esta práctica se ha realizado intentando aplicar los principios SOLID, destacando principalmente el <em>Interface Segregation Principle</em> en el caso del ejercicio 2 (definir varias interfaces cortas en vez de una extensa), el <em>Open-Closed</em> (clases abiertas a extensiones y cerradas a modificciones) y el <em>Single responsibility</em> (clases con una sola responsabildad) principles en el ejercicio 1; y el <em>Dependency Inversion principle</em> (hacer que los detalles dependan de las abstracciones) en el ejericio 3. Ejemplo de este último es el hacer que la clase <code>Movie</code> dependa de la clase abstracta <code>Person</code> en vez de hacer que dependa directamente de la clase detallada <code>Actor</code></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

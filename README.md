@@ -213,7 +213,7 @@ Posteriormente desarrollaremos la clase abstracta genércia `BasicStreamableColl
 En este punto, crearemos una jerarquía de clases aparte para representar producciones audiovisuales tales que podamos utilizar dichas clases para definir clases detalladas hijas de la clase `BasicStreamabaleCollection`.
 
 Esta jerarquía seguirá el siguiente esquema:
-![Jerarquía producciones](media://ej3-hierarchy-prod.svg)
+![Jerarquía producciones](media://ej3-prod-hierarchy.svg)
 
 
 De esta forma podemos implementar las clases `SeriesCollection` y `MovieCollection`:
