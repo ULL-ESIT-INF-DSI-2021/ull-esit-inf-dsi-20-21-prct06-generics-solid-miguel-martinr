@@ -223,6 +223,9 @@ De esta forma podemos implementar las clases `SeriesCollection` y `MovieCollecti
 
 Ambas clases implementan los métodos definidos como abstractos en su superclase.
 
+![Dsflix scheme](media://dsflix-scheme.svg)
+
+
 Es importante recalcar que debido a que el parámetro genérico de tipo no está restringido en la superclase, no se pueden implementar los métodos de las interfaces `Searchable`, ya que los tipos podrían no contener los atributos necesarios. En esta implementación, se ha optado por no restringir el parámetro de tipo genérico para evidenciar dicho problema, que podría ser fácilmente resuelto haciendo que el parámetro de tipo genérico extienda a la clase `AudioVisualProduction`.
 
 
@@ -254,6 +257,6 @@ console.table(movieCollection.searchByYear(2017));
 ![Demo dsflix](media://dsflix-demo.jpg)
 
 
-## **Conclusionesx**
+## **Conclusiones**
 
 Esta práctica se ha realizado intentando aplicar los principios SOLID, destacando principalmente el *Interface Segregation Principle* en el caso del ejercicio 2 (definir varias interfaces cortas en vez de una extensa), el *Open-Closed* (clases abiertas a extensiones y cerradas a modificciones) y el *Single responsibility* (clases con una sola responsabildad) principles en el ejercicio 1; y el *Dependency Inversion principle* (hacer que los detalles dependan de las abstracciones) en el ejericio 3. Ejemplo de este último es el hacer que la clase `Movie` dependa de la clase abstracta `Person` en vez de hacer que dependa directamente de la clase detallada `Actor`
