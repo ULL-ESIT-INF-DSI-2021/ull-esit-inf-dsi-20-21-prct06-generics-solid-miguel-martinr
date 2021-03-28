@@ -195,11 +195,65 @@ console.log(vel.toMS(), 'M/S');
 ![Converter demo](media://converter-demo.jpg)
 
 
-
-
-
-
-
 ## **3. DSIflix**
 
+Para este ejercicio diseñaremos el modelo de datos de una plataforma de vídeo en streaming.
 
+* Definiremos una interfaz genérica llamada `Streamable<StreamType>` que definirá algunos de los métodos que implementa una colección de emisiones. Esta interfaz recibirá como argumento de genérico el tipo de dato de las emisiones de la colección (`StreamType`). Los métodos que definirá son:
+  * `getCollection() StreamType[]`: Devuelve la colección de emisiones.
+  * `setCollection(newCollection StreamType[])` : Actualiza la colección de emisiones.
+
+Además, para cumplir con el `Interface Segregation Principle`, añadiremos otras dos interfaces que definen más métodos a implementar por colecciones de emisiones:
+
+* **SearchableByName<Searchresult>**: definirá el método `searchByName`, que recibirá un nombre y devolverá un vector de elementos `SearchResult` con los elementos cuyo nombre coincida con el término de búsqueda.
+* **SearchableByYear<SearchResult>**: de forma similar a la interfaz anterior, definirá el método `searchByYear`, que recibirá como argumento el año como un `number`, y retornará un vector con los resultados.
+  
+Posteriormente desarrollaremos la clase abstracta genércia `BasicStreamableCollection`, que implementará las interfaces anteriormente mencionadas y recibirá como argumento de tipo genérico el tipo de elementos de los que estará compuesta la colección a almacenar. También definirá la colección como tal, que consistirá en un vector del tipo genérico pasado como argumento. Además, implementará el setter y getter para dicho atributo y definirá como asbtractos los métodos de las interfaces `SearchableByName` y `SearchableByYear`.
+
+En este punto, crearemos una jerarquía de clases aparte para representar producciones audiovisuales tales que podamos utilizar dichas clases para definir clases detalladas hijas de la clase `BasicStreamabaleCollection`.
+
+Esta jerarquía seguirá el siguiente esquema:
+![Jerarquía producciones](media://ej3-hierarchy-prod.svg)
+
+
+De esta forma podemos implementar las clases `SeriesCollection` y `MovieCollection`:
+
+* `SeriesCollection` extiende a `BasicStreamabaleCollection` pasándole como argumento de tipo genérico la clase `Series`. 
+* `MovieCollection` extiende a `BasicStreamabaleCollection` pasándole como argumento de tipo genérico la clase `Movie`. 
+
+Ambas clases implementan los métodos definidos como abstractos en su superclase.
+
+Es importante recalcar que debido a que el parámetro genérico de tipo no está restringido en la superclase, no se pueden implementar los métodos de las interfaces `Searchable`, ya que los tipos podrían no contener los atributos necesarios. En esta implementación, se ha optado por no restringir el parámetro de tipo genérico para evidenciar dicho problema, que podría ser fácilmente resuelto haciendo que el parámetro de tipo genérico extienda a la clase `AudioVisualProduction`.
+
+
+Ejemplo de uso:
+
+```typescript
+const movies = [
+  new Movie('Blade Runner 2049', 2017, 'ACTION', 'PROducer1',
+      [
+        new Actor('Dave', 'Bautista', 1960), 
+        new Actor('Ryan', 'Gosling', 1980),
+      ],
+      164 * 60),
+
+  new Movie('Togo', 2019, 'DRAMA', 'Producer2',
+      [
+        new Actor('Christopher', 'Heyerdahl', 1970),
+        new Actor('Willem', 'Dafoe', 1950),
+      ],
+      113 * 60),
+];
+
+const movieCollection = new MovieCollection(movies);
+
+console.table(movieCollection.getCollection());
+console.table(movieCollection.searchByYear(2017));
+```
+
+![Demo dsflix](media://dsflix-demo.jpg)
+
+
+## **Conclusionesx**
+
+Esta práctica se ha realizado intentando aplicar los principios SOLID, destacando principalmente el *Interface Segregation Principle* en el caso del ejercicio 2 (definir varias interfaces cortas en vez de una extensa), el *Open-Closed* (clases abiertas a extensiones y cerradas a modificciones) y el *Single responsibility* (clases con una sola responsabildad) principles en el ejercicio 1; y el *Dependency Inversion principle* (hacer que los detalles dependan de las abstracciones) en el ejericio 3. Ejemplo de este último es el hacer que la clase `Movie` dependa de la clase abstracta `Person` en vez de hacer que dependa directamente de la clase detallada `Actor`

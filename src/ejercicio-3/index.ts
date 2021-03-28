@@ -22,4 +22,5 @@ const movies = [
 
 const movieCollection = new MovieCollection(movies);
 
+console.table(movieCollection.getCollection());
 console.table(movieCollection.searchByYear(2017));
