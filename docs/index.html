@@ -276,6 +276,7 @@
 					<li><code>MovieCollection</code> extiende a <code>BasicStreamabaleCollection</code> pasándole como argumento de tipo genérico la clase <code>Movie</code>. </li>
 				</ul>
 				<p>Ambas clases implementan los métodos definidos como abstractos en su superclase.</p>
+				<p><img src="media/dsflix-scheme.svg" alt="Dsflix scheme"></p>
 				<p>Es importante recalcar que debido a que el parámetro genérico de tipo no está restringido en la superclase, no se pueden implementar los métodos de las interfaces <code>Searchable</code>, ya que los tipos podrían no contener los atributos necesarios. En esta implementación, se ha optado por no restringir el parámetro de tipo genérico para evidenciar dicho problema, que podría ser fácilmente resuelto haciendo que el parámetro de tipo genérico extienda a la clase <code>AudioVisualProduction</code>.</p>
 				<p>Ejemplo de uso:</p>
 				<pre><code class="language-typescript"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">movies</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> [</span>
@@ -300,8 +301,8 @@
 <span style="color: #24292E">console.</span><span style="color: #6F42C1">table</span><span style="color: #24292E">(movieCollection.</span><span style="color: #6F42C1">searchByYear</span><span style="color: #24292E">(</span><span style="color: #005CC5">2017</span><span style="color: #24292E">));</span>
 </code></pre>
 				<p><img src="media/dsflix-demo.jpg" alt="Demo dsflix"></p>
-				<a href="#conclusionesx" id="conclusionesx" style="color: inherit; text-decoration: none;">
-					<h2><strong>Conclusionesx</strong></h2>
+				<a href="#conclusiones" id="conclusiones" style="color: inherit; text-decoration: none;">
+					<h2><strong>Conclusiones</strong></h2>
 				</a>
 				<p>Esta práctica se ha realizado intentando aplicar los principios SOLID, destacando principalmente el <em>Interface Segregation Principle</em> en el caso del ejercicio 2 (definir varias interfaces cortas en vez de una extensa), el <em>Open-Closed</em> (clases abiertas a extensiones y cerradas a modificciones) y el <em>Single responsibility</em> (clases con una sola responsabildad) principles en el ejercicio 1; y el <em>Dependency Inversion principle</em> (hacer que los detalles dependan de las abstracciones) en el ejericio 3. Ejemplo de este último es el hacer que la clase <code>Movie</code> dependa de la clase abstracta <code>Person</code> en vez de hacer que dependa directamente de la clase detallada <code>Actor</code></p>
 			</div>
