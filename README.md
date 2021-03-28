@@ -117,6 +117,88 @@ A continuación, haremos que `MultiversePokedex` extienda a `Pokedex` y que pase
 
 
 ## **2. Conversor de unidades**
+A continuación, desarrollaremos un conjunto de clases que nos permitan realizar conversiones de unidades o sistemas de medición para distintas magnitudes físicas. En concreto, crearemos un sistema inicialmente integrado por dos magnitutdes físicas: **Masa** y **Velocidad**, y que será fácilmente extendible mediante la adición de nuevas clases.
+
+El diseño para este ejercicio consiste en el desarrollo de una interfaz genérica llamada `isConvertible` que define la siguiente forma:
+```typescript
+export interface IsConvertible<DataType, UnitType> {
+  data: DataType;
+  currentUnit: UnitType;
+  convertTo(unit: UnitType): DataType;
+}
+```
+
+Donde **`UnitType`** especifica el conjunto de unidades de medida con el que se va a trabajar; por ejemplo: metros, centímetros y kilómetros; y **`DataType`** especifica el tipo del dato a convertir, por ejemplo: number, string, etc...
+
+
+Esta interfaz define un atributo llamado `data` que representará el dato a almacenar y sobre el que se ejecutarán las transformaciones. Es importante recalcar que al estar definido en la interfaz, dicho dato será necesariamente público en aquellas clases que implementen la interfaz. En caso de que sea necesario definirlo como un atributo privado podríamos evitar definirlo en la interfaz y limitar el contenido de la misma a los métodos que gestionan el atributo.
+
+Asimismo, define un atributo llamado `currentUnit` que almacena la unidad de medida bajo la cual está representado el dato actualmente.
+
+Por último, el método `convertTo` recibe como parámetro la unidad de medida a la cual se quiere transformar el dato almacenado y retorna dicho valor ya transformado.
+
+Veamos el ejemplo de implementación para la Velocidad:
+
+* La clase `Velocity` implementa la interfaz `isConvertibe` pasando como argumentos de tipo genérico el tipo `number` y la unión de tipos `VelocityUnit`, que incluye metros por segundo, kilómetros por hora y millas por hora. El método `convertTo` recibe como parámetro un valor de tipo `VelocityUnit` y, mediante un switch-case, invoca uno de los métodos que convierte el dato almacenado a la unidad deseada:
+* 
+  ```typescript
+  export type VelocityUnit = 'KM/H' | 'MPH' | 'M/S';
+
+  export class Velocity implements IsConvertible<number, VelocityUnit> {
+  constructor(public readonly data: number, readonly currentUnit: VelocityUnit) {}
+  
+  convertTo(unit: VelocityUnit): number {
+    switch (unit) {
+      case 'KM/H':
+        return this.convertToKMH();
+      case 'MPH':
+        return this.convertToMPH();
+      case 'M/S':
+        return this.convertToMS();
+    }
+  }
+    .  .  .
+  
+  private convertToKMH(): number {
+    switch (this.currentUnit) {
+      case 'KM/H':
+        return this.data;
+      case 'M/S':
+        return this.data * 3.6;
+      case 'MPH':
+        return this.data * 1.60934;
+    }
+  }
+    .  .  .
+  ```
+
+
+Además, define una serie de métodos que facilitan la conversión entre unidades de medida, por ejemplo:
+
+```typescript
+  .  .  .
+toKMH(): number {
+  return this.convertTo('KM/H');
+}
+  .  .  .
+```
+
+
+De modo que su uso sea de la forma:
+```typescript
+const vel = new Velocity(100, 'KM/H');
+
+console.log(vel.toMPH(), 'MPH');
+console.log(vel.toMS(), 'M/S');
+```
+
+![Converter demo](media://converter-demo.jpg)
+
+
+
+
+
+
 
 ## **3. DSIflix**
 
